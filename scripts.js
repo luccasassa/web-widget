@@ -67,7 +67,8 @@ window.addEventListener("load", () => {
         })
         .then((data) => {
           console.log(data);
-
+          console.log('Fetch started');
+          
           const { icon, description } = data.weather[0];
           const { temp, humidity } = data.main;
           const { speed } = data.wind;
@@ -78,7 +79,9 @@ window.addEventListener("load", () => {
           summary.innerText = description;
           hum.innerText = humidity + " %";
           wind.innerText = speed + " km/h";
-        });
+
+          console.log('Fetch ended');
+        })
     });
   }
 });
