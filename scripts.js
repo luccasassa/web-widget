@@ -37,28 +37,28 @@ currentDate();
 
 ////////////////////// weather
 
-let lon;
-let lat;
-let loc = document.querySelector(".date-location");
-let iconw = document.querySelector(".iconw");
-let temperature = document.querySelector(".temp");
-let summary = document.querySelector(".summary");
-let hum = document.querySelector(".humidity");
-let wind = document.querySelector(".wind");
-
-const apiKey = "75759cf97fe18753a027ab6f7b2c8624";
-const kelvin = 273;
-  
 window.addEventListener("load", () => {
+  let lon;
+  let lat;
+  let loc = document.querySelector(".date-location");
+  let iconw = document.querySelector(".iconw");
+  let temperature = document.querySelector(".temp");
+  let summary = document.querySelector(".summary");
+  let hum = document.querySelector(".humidity");
+  let wind = document.querySelector(".wind");
+  
+  const apiKey = "75759cf97fe18753a027ab6f7b2c8624";
+  const kelvin = 273;
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
 
-      console.log(position);
       lon = position.coords.longitude;
       lat = position.coords.latitude;
+      console.log(position);
   
       // API URL
-      const base = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=75759cf97fe18753a027ab6f7b2c8624`;
+      let base = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
 
       // Calling the API
       fetch(base)
@@ -67,20 +67,19 @@ window.addEventListener("load", () => {
         })
         .then((data) => {
           console.log(data);
-          console.log('Fetch started');
           
           const { icon, description } = data.weather[0];
           const { temp, humidity } = data.main;
           const { speed } = data.wind;
-
+          
           loc.textContent = data.name + ", " + data.sys.country;
           iconw.src = "https://openweathermap.org/img/wn/" + icon + ".png";
           temperature.innerText = Math.floor(data.main.temp - kelvin) + " °C";
           summary.innerText = description;
           hum.innerText = humidity + " %";
           wind.innerText = speed + " km/h";
-
-          console.log('Fetch ended');
+          
+          console.log('Fetch ejecuted');
         })
     });
   }
