@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO -->
+    <meta name="author" content="https://linktr.ee/luccasassa" />
+    <meta
+      name="description"
+      content="Luca's little projects. If you found this content useful, please tap the ♥️ icon and give me a follow. Thanks ☺️"
+    />
+
+    <!-- FAVICON -->
+    <link rel="icon" href="https://i.imgur.com/l6Z1OOF.png" />
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./template.css" />
+
+    <!-- TITLE -->
+    <title>WEB WIDGET</title>
+  </head>
+
+  <body>
+    <main>
+      
+      <!-- date -->
+      <div class="date">
+        <span class="date-clock"></span>
+
+          <span class="date-today"></span>
+        
+          <span class="date-location">Location</span>
+      </div>
+
+      <!-- weather -->
+      <div class="weather">
+        <div class="weather-top"> <!-- top -->
+          <img src="" class="iconw"></img>
+
+          <div class="weather-summary">
+            <span class="summary" style="text-transform: capitalize;">Summary</span>
+          </div>
+        </div>
+
+        <div class="weather-bottom"> <!-- bottom -->
+          <div class="weather-temp" title="Temperature">
+            <img src="https://icongr.am/clarity/thermometer.svg?size=20&color=ffffff">
+            <span class="temp">Temperature</span>
+          </div>
+
+          <div class="weather-humidity" title="Humidity">
+            <img src="https://icongr.am/material/waves.svg?size=20&color=ffffff">
+            <span class="humidity">Humidity</span>
+          </div>
+  
+          <div class="weather-wind" title="Wind">
+            <img src="https://icongr.am/material/weather-windy.svg?size=20&color=ffffff">
+            <span class="wind">Wind</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- browser & OS -->
+      <div class="browser-os">
+        <div title="Browser" class="browser">
+          <img src="https://icongr.am/material/web.svg?size=18&color=ffffff">
+          <span id="browserType">Browser</span>
+        </div>
+        
+        <div title="Operating system" class="os">
+          <img src="https://icongr.am/material/devices.svg?size=18&color=ffffff">
+          <span id="osType">Operating system</span>
+        </div>
+      </div>
+
+      <!-- network status -->
+      <span id="network-status" title="Network status"></span>
+      
+    </main>
+
+    <!-- SCRIPTS -->
+    <script src="./scripts.js"></script>
+    
+    <script>
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var div = document.createElement("div");
+          div.innerHTML = this.responseText;
+          document.body.appendChild(div);
+        }
+      };
+
+      xhttp.open(
+        "GET",
+        "https://raw.githubusercontent.com/luccasassa/API-REST/main/watermark.html",
+        true
+      );
+      xhttp.send();
+    </script>
+  </body>
+</html>
