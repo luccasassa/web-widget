@@ -83,48 +83,60 @@ window.addEventListener("load", () => {
   }
 });
 
-////////////////////// browser & OS
+////////////////////// browser
 
 let browserDetailsRef = document.querySelector("#browserType");
 let odDetailsRef = document.querySelector("#osType");
 
-let browserList = [
-  {name: 'Firefox', value: 'Firefox'},
-  {name: 'Opera', value: 'Opera'},
-  {name: 'Chrome', value: 'Chrome'},
-  {name: 'Edge', value: 'Edge'},
-  {name: 'Brave', value: 'Brave'},
-  {name: 'Safari', value: 'Safari'}
-];
-
-let osList = [
-  {name: 'Android', value: 'Android'},
-  {name: 'iOs', value: 'iOs'},
-  {name: 'Linux', value: 'Linux'},
-  {name: 'Windows', value: 'Win'},
-  {name: 'Macintosh', value: 'Mac'},
-  {name: 'ipad', value: 'ipad'}
-];
-
-let browserOsChecker = () => {
-  let userDetails = navigator.userAgent;
-
-  for (let i in browserList) {
-    if (userDetails.includes(browserList[i].value)) {
-      browserDetailsRef.innerText = browserList[i].name || 'unknown Browser';
-      break;
-    }
+let browserName = (function (agent) {
+  switch (true) {
+      case agent.indexOf("edge") > -1:
+        return "MS Edge";
+      case agent.indexOf("edg/") > -1:
+        return "Edge (chromium based)";
+      case agent.indexOf("opr") > -1 && !!window.opr:
+        return "Opera";
+      case agent.indexOf("chrome") > -1 && !!window.chrome:
+        return "Chrome";
+      case agent.indexOf("trident") > -1:
+        return "MS IE";
+      case agent.indexOf("firefox") > -1:
+        return "Firefox";
+      case agent.indexOf("safari") > -1:
+        return "Safari";
+      default:
+        return "Unknow browser";
   }
+})(window.navigator.userAgent.toLowerCase());
 
-  for (const i in osList) {
-    if (userDetails.includes(osList[i].value)) {
-      odDetailsRef.innerText = osList[i].name;
-      break;
-    }
+browserDetailsRef.innerText = browserName;  
+
+////////////////////// Operating system
+
+let osName = () => {
+  let userAgent = window.navigator.userAgent;
+  let platform = window.navigator?.userAgentData?.platform || window.navigator.platform;
+  let macosPlatforms = ['Macintosh', 'MacIntel', 'MacPPC', 'Mac68K'];
+  let windowsPlatforms = ['Win32', 'Win64', 'Windows', 'WinCE'];
+  let iosPlatforms = ['iPhone', 'iPad', 'iPod'];
+
+  switch (true) {
+    case macosPlatforms.indexOf(platform) !== -1:
+      return 'Mac OS';
+    case iosPlatforms.indexOf(platform) !== -1:
+      return 'iOS';
+    case windowsPlatforms.indexOf(platform) !== -1:
+      return 'Windows';
+    case /Android/.test(userAgent):
+      return 'Android';
+    case /Linux/.test(platform):
+      return 'Linux';
+    default:
+      return 'Unknow Operating system';
   }
-};
+}
 
-window.onload = browserOsChecker();
+odDetailsRef.innerText = osName();
 
 ////////////////////// network status
 
