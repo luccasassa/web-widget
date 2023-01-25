@@ -37,53 +37,56 @@ currentDate();
 
 ////////////////////// weather
 
-window.addEventListener("load", () => {
-  let lon;
-  let lat;
-  let loc = document.querySelector(".date-location");
-  let iconw = document.querySelector(".iconw");
-  let temperature = document.querySelector(".temp");
-  let summary = document.querySelector(".summary");
-  let hum = document.querySelector(".humidity");
-  let wind = document.querySelector(".wind");
-  
-  const apiKey = "75759cf97fe18753a027ab6f7b2c8624";
-  const kelvin = 273;
+let loc = document.querySelector(".weather-location");
+let iconw = document.querySelector(".iconw");
+let temperature = document.querySelector(".temp");
+let summary = document.querySelector(".summary");
+let hum = document.querySelector(".humidity");
+let wind = document.querySelector(".wind");
+let input = document.querySelector('#search-input');
+let button = document.querySelector('#search-button');
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
+let weather = {
+  apiKey: "75759cf97fe18753a027ab6f7b2c8624",
+  fetchWeather: function (location) {
+    fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=" + this.apiKey)
+      .then((response) => {
+        if (!response.ok) {
+          alert("No weather found.");
+          throw new Error("No weather found.");
+        }
+        return response.json();
+      })
+      .then((data) => this.displayWeather(data));
+  },
+  displayWeather: function (data) {
+    const { name } = data;
+    const { icon, description } = data.weather[0];
+    const { temp, humidity } = data.main;
+    const { speed } = data.wind;
+    loc.innerText = name + ", " + data.sys.country;
+    iconw.src = "https://openweathermap.org/img/wn/" + icon + ".png";
+    summary.innerText = description;
+    temperature.innerText = (temp) + "°C";
+    hum.innerText = humidity + " %";
+    wind.innerText = speed + " km/h";
+  },
+  search: function () {
+    this.fetchWeather(input.value);
+  },
+};
 
-      lon = position.coords.longitude;
-      lat = position.coords.latitude;
-      console.log(position);
-  
-      // API URL
-      let base = 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&appid=' + apiKey;
-
-      // Calling the API
-      fetch(base)
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          
-          const { icon, description } = data.weather[0];
-          const { temp, humidity } = data.main;
-          const { speed } = data.wind;
-          
-          loc.textContent = data.name + ", " + data.sys.country;
-          iconw.src = "https://openweathermap.org/img/wn/" + icon + ".png";
-          temperature.innerText = Math.floor(data.main.temp - kelvin) + " °C";
-          summary.innerText = description;
-          hum.innerText = humidity + " %";
-          wind.innerText = speed + " km/h";
-          
-          console.log('Fetch ejecuted');
-        })
-    });
-  }
+button.addEventListener("click", function () {
+  weather.search();
 });
+
+input.addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+      weather.search();
+    }
+  });
+
+weather.fetchWeather('Mendoza');
 
 ////////////////////// browser
 
