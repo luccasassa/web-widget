@@ -46,7 +46,7 @@
             <div class="search" title="Search city or country">
               <input type="text" id="search-input" placeholder="Search" autocomplete="off">
               <button id="search-button">
-                <img src="https://icongr.am/clarity/search.svg?size=20&color=ffffff">
+                <img src="https://icongr.am/clarity/search.svg?size=20&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
               </button>
             </div>
 
@@ -61,17 +61,17 @@
   
           <div class="weather-bottom"> <!-- bottom -->
             <div class="weather-temp" title="Temperature">
-              <img src="https://icongr.am/clarity/thermometer.svg?size=20&color=ffffff">
+              <img src="https://icongr.am/clarity/thermometer.svg?size=20&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
               <span class="temp"></span>
             </div>
   
             <div class="weather-humidity" title="Humidity">
-              <img src="https://icongr.am/material/waves.svg?size=20&color=ffffff">
+              <img src="https://icongr.am/material/waves.svg?size=20&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
               <span class="humidity"></span>
             </div>
     
             <div class="weather-wind" title="Wind">
-              <img src="https://icongr.am/material/weather-windy.svg?size=20&color=ffffff">
+              <img src="https://icongr.am/material/weather-windy.svg?size=20&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
               <span class="wind"></span>
             </div>
           </div>
@@ -81,12 +81,12 @@
       <!-- browser & OS -->
       <div class="browser-os">
         <div title="Browser" class="browser">
-          <img src="https://icongr.am/material/web.svg?size=18&color=ffffff">
+          <img src="https://icongr.am/material/web.svg?size=18&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
           <span id="browserType">Browser</span>
         </div>
         
         <div title="Operating system" class="os">
-          <img src="https://icongr.am/material/devices.svg?size=18&color=ffffff">
+          <img src="https://icongr.am/material/devices.svg?size=18&color=ffffff" onerror="this.onerror=null; this.src=`https://icongr.am/material/network-off-outline.svg?size=18&color=ffffff`">
           <span id="osType">Operating system</span>
         </div>
       </div>
@@ -98,6 +98,8 @@
 
     <!-- SCRIPTS -->
     <script src="./scripts.js"></script>
+    <script src="./scrollReveal.js"></script>
+    <script src="./reveals.js"></script>
     
     <script>
       var xhttp = new XMLHttpRequest();

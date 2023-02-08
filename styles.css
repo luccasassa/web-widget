@@ -132,7 +132,8 @@ main {
 .weather-humidity,
 .weather-wind,
 .browser,
-.os {
+.os,
+.network-conection {
   display: flex;
   justify-content: center;
   align-items: center;
