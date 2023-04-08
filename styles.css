@@ -148,3 +148,57 @@ main {
   gap: .4rem;
   font-size: .9rem;
 }
+
+/* toast */
+.toast {
+  line-height: 1.5;
+  margin-bottom: 1em;
+  padding: 1.25em;
+  position: absolute;
+  right: -365px;
+  bottom: 1em;
+  transition: 0.3s ease-in-out;
+}
+
+.toast.on {
+  transform: translateX(-365px);
+}
+
+.close {
+  cursor: default;
+  float: right;
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-left: 1em;
+  opacity: .8;
+}
+
+.jam {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: none;
+  border-radius: 5px 0 5px 5px;
+  color: #fff;
+}
+
+.map {
+  text-decoration: underline;
+}
+
+/* .show {
+  background-color: #fff;
+  border: 1px solid #0363c8;
+  border-radius: 3px;
+  color: #0363c8;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: .5em 1em;
+  text-transform: uppercase;
+}
+
+.show:hover {
+  background-color: #0363c8;
+  color: #fff;
+} */

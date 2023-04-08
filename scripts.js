@@ -52,7 +52,10 @@ let weather = {
     fetch("https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=" + this.apiKey)
       .then((response) => {
         if (!response.ok) {
-          alert("No weather found.");
+          document.querySelector('.toast').classList.add('on');
+          setTimeout(function () {
+            document.querySelector('.toast').classList.remove('on');
+          }, 5000);
           throw new Error("No weather found.");
         }
         return response.json();
@@ -87,6 +90,8 @@ input.addEventListener("keyup", function (event) {
   });
 
 weather.fetchWeather('Mendoza');
+
+document.querySelector('.close').addEventListener('click', function () {document.querySelector('.toast').classList.remove('on');})
 
 ////////////////////// browser
 
